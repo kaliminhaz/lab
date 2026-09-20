@@ -1,0 +1,14 @@
+services:
+  sqli-lab:
+    build: .
+    container_name: hackosquad-day3-sqli
+    ports:
+      - "5000:5000"
+    environment:
+      # Change these before sharing the lab with anyone else,
+      # otherwise everybody's flag is identical.
+      - FLAG=hackosquad{qu0t3s_ar3_n0t_c0nsent}
+      - ADMIN_PASSWORD=Tr0ub4dor&9xk2
+      - SECRET_KEY=change-me-please
+    # No volume mount on purpose — every restart = a clean database,
+    # so nobody can "cheat" by leaving injected rows lying around.

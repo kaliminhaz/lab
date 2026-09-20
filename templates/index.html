@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hackosquad · Day 3 Challenge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+{% include "_base_style.html" %}
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">hackosquad</div>
+    <div class="day-pill">Day 3 · The Practice Login</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="wrap">
+    <span class="tagline">FIND THE FIELD IT TRUSTS TOO MUCH</span>
+    <h1>Break Into This Login</h1>
+    <p class="lede">This form is wired up exactly like the one from the lesson. Somewhere in here, your input gets pasted straight into a database question. Your job: rewrite that question.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    {% if error %}
+    <div class="error-box">🚫 {{ error }}</div>
+    {% endif %}
+    <form method="POST" action="/login">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" autocomplete="off" placeholder="try something clever...">
+      <label for="password">Password</label>
+      <input type="text" id="password" name="password" autocomplete="off" placeholder="anything works, eventually">
+      <div class="submit-row">
+        <button type="submit" class="btn">Log In →</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if last_query %}
+<section>
+  <div class="wrap">
+    <div class="eyebrow">WHAT THE SERVER ACTUALLY ASKED THE DATABASE</div>
+    <h2 class="kicker">Here's the exact question your input built</h2>
+    <p class="body-txt" style="margin-bottom:18px;">This is the real query the app just ran, unedited. Study how your text landed inside it &mdash; that's the whole game.</p>
+    <div class="terminal-block">
+      <div class="terminal-bar"><div class="terminal-dot r"></div><div class="terminal-dot y"></div><div class="terminal-dot g"></div><div class="terminal-title">live query</div></div>
+      <div class="terminal-body"><span class="t-out">SELECT * FROM users WHERE username =</span> <span class="t-in">'{{ last_username }}'</span> <span class="t-out">AND password = '...'</span></div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section>
+  <div class="wrap">
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text">Stuck? Remember the lesson: one single quote can end the string early. What comes after it is no longer data &mdash; it's <i>logic</i>. <a href="/hint" style="text-decoration:underline;">Need a bigger nudge? →</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>hackosquad · cyber week · day 3 challenge · this box is intentionally vulnerable, don't reuse this code anywhere real</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hackosquad · Hint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+{% include "_base_style.html" %}
+<style>
+  details{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:18px 20px;box-shadow:5px 5px 0 var(--ink);margin-top:16px;cursor:pointer;}
+  summary{font-family:var(--display);font-weight:700;font-size:14.5px;color:var(--purple);list-style:none;}
+  summary::-webkit-details-marker{display:none;}
+  summary::before{content:"▸ ";}
+  details[open] summary::before{content:"▾ ";}
+  details p{margin-top:12px;font-size:14.5px;line-height:1.65;color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">hackosquad</div>
+    <div class="day-pill">Day 3 · Hints</div>
+  </div>
+</div>
+
+<div class="hero" style="padding:44px 0 56px;">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="wrap">
+    <span class="tagline">OPEN ONLY WHAT YOU NEED</span>
+    <h1 style="font-size:clamp(28px,4.4vw,42px);">Three Nudges, Ranked</h1>
+    <p class="lede">Try to solve it with just Hint 1. Only open the next one if you're truly stuck.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <details>
+      <summary>Hint 1 — Where does your text actually land?</summary>
+      <p>Go back and look at the terminal block that appeared under the form after your last attempt. Your username got pasted between two single quotes. What happens if your input <i>contains</i> a single quote?</p>
+    </details>
+    <details>
+      <summary>Hint 2 — Ending the string early</summary>
+      <p>A lone <code>'</code> in the username field closes the quoted string ahead of schedule. Everything you type after that isn't treated as data anymore &mdash; it becomes part of the actual SQL logic the database executes.</p>
+    </details>
+    <details>
+      <summary>Hint 3 — Making the question unanswerable-as-false</summary>
+      <p>Databases love <code>OR</code>. If you close the username string and then add <code>OR 1=1</code>, you've created a condition that's always true, no matter what the real username is. Add <code>--</code> right after to comment out the rest of the original query (including the password check). Put it together as the username: a single quote, then <code>OR 1=1 --</code>, with a space before and after.</p>
+    </details>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <a href="/" class="btn">← Back to the Login</a>
+  </div>
+</section>
+
+<footer>
+  <p>hackosquad · cyber week · day 3 challenge</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hackosquad · Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+{% include "_base_style.html" %}
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">hackosquad</div>
+    <div class="day-pill">Day 3 · Dashboard</div>
+  </div>
+</div>
+
+<div class="hero" style="padding:44px 0 60px;">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="wrap">
+    {% if is_admin %}
+    <span class="tagline">ACCESS GRANTED</span>
+    <h1 style="font-size:clamp(28px,4.4vw,42px);">Welcome, {{ user }}.</h1>
+    <p class="lede">You didn't know the password. You rewrote the question so the password stopped mattering. That's the attack, start to finish.</p>
+    {% else %}
+    <span class="tagline">LOGGED IN — NOT AS ADMIN</span>
+    <h1 style="font-size:clamp(28px,4.4vw,42px);">Welcome, {{ user }}.</h1>
+    <p class="lede">This is a real, valid login &mdash; but a regular account like this one was never the target. Somewhere in that form is a way to become someone else entirely.</p>
+    {% endif %}
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    {% if flag %}
+    <div class="flag-card">
+      <div class="fl-tag">🏁 CHALLENGE COMPLETE</div>
+      <div class="fl-val">{{ flag }}</div>
+    </div>
+    <div style="height:20px;"></div>
+    <div class="callout win">
+      <span class="callout-icon">✅</span>
+      <div class="callout-text">You bypassed authentication without ever knowing the admin password. The query returned the admin row because your input made the WHERE clause unconditionally true. That's SQL Injection, live.</div>
+    </div>
+    {% else %}
+    <div class="callout danger">
+      <span class="callout-icon">🔒</span>
+      <div class="callout-text">No flag here yet. This account exists to prove the form works normally &mdash; the flag only appears for whoever the query resolves to <b>admin</b>. Go back and make the WHERE clause always true.</div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <a href="/logout" class="btn ghost">← Log Out &amp; Try Again</a>
+  </div>
+</section>
+
+<footer>
+  <p>hackosquad · cyber week · day 3 challenge</p>
+</footer>
+
+</body>
+</html>
